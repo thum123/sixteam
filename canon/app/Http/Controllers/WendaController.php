@@ -72,15 +72,15 @@ class WendaController extends Controller
 
     }
     public function hui(){
-        //$username=$_SESSION['username'];
-        $username='111';
-        if(empty($username)){
-            echo "<script>alert('请先登录');location.href='login/login';</script>";
-        }else{
+        $username=$_SESSION['username'];
+        // $username='111';
+        // if(empty($username)){
+        //     echo "<script>alert('请先登录');location.href='login/login';</script>";
+        // }else{
             $sql=DB::table('users')->where("user_name","$username")->first();
             //print_r($sql);die;
             $user_id=$sql['user_id'];
-        }
+        // }
         $con=$_POST['aa'];
         $tid=$_POST['tid'];
         $time=date("Y-m-d H:i:s");
@@ -93,7 +93,22 @@ class WendaController extends Controller
 
     }
 
+    /*
+     *  赞同投票
+     */
+    public function endorse()
+    {
+        $u_id = $_GET['u_id'];
+        $t_id = $_GET['t_id'];
+        //查询出当前问题在数据库中的总的赞同条数
+        $data = DB::table('t_tw')->where("t_id","$t_id")->first();
+        // var_dump($data);
+        $endorse = $data['endorse'] + 1;
+        // echo $endorse;
+        $res = DB::table('t_tw')->where('t_id',$t_id)->update(['endorse' => $endorse]);
+        echo $res;
 
+    }
     // public function zid(){
     //         session_start();
     //         $zid=$_GET['name'];

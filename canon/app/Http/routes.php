@@ -59,6 +59,8 @@ Route::get('detail', 'WendaController@detail');
 Route::post('hui', 'WendaController@hui');
 //点赞
 Route::get('zid', 'WendaController@zid');
+//赞同投票
+Route::get('endorse', 'WendaController@endorse');
 /*
  * 猿问结束
  */
@@ -110,7 +112,10 @@ Route::get('college','CompanyController@college');
 Route::get('college_x','CompanyController@college_x');
 Route::get('college_exam','CompanyController@college_exam');
 
-
+//第三方登陆类
+// Route::any('me','SanlogController@me');
+// Route::any('http','SanlogController@http');
+Route::any('back','SanlogController@back');
 
 /*
 |--------------------------------------------------------------------------
@@ -124,5 +129,5 @@ Route::get('college_exam','CompanyController@college_exam');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    
 });

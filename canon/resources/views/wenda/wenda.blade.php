@@ -1,4 +1,8 @@
-
+<?php 
+if(!isset($_SESSION)){
+session_start(); 
+}
+?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -74,7 +78,6 @@ var is_choice = "0";
 
 
 
-
 <?php foreach($pro as $k=>$v){?>
 
 
@@ -101,15 +104,11 @@ var is_choice = "0";
         </div>
         <div class="ctrl-bar clearfix">
             <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
-
-
-
-
-
-            <em class='bb' >赞同</em>
-
-
-
+            <em class='endorse' id="eny<?php echo $v['t_id']?>" onclick="endorse(<?php echo $v['t_id']?>,<?php echo empty($_SESSION['u_id'])?'0':$_SESSION['u_id'];?>)" >赞同(<?php echo $v['endorse']?>)</em>
+            <input type="hidden" id="en<?php echo $v['t_id']?>" value="<?php echo $v['endorse']?>">
+            </span>
+            <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
+            <em class='answer' onclick="<?php echo $v['t_id']?>">回答</em>
             </span>
             <div class="share-box clearfix">
                 
@@ -150,8 +149,59 @@ var is_choice = "0";
         </div><!--.release-reply-con end-->
     </div><!--.reply-con end-->
     </div><!--.ques-answer end-->
+<input type="hidden" value="0" id="noendorse">
+<script>
+        //赞同
+        function endorse(t_id,u_id)
+        {      
+                   
+                var noendorse = $("#noendorse").val();
 
+                //获取到当前总共点赞的数量
+                var ennum = $("#en"+t_id).val();
+                if(u_id==0)
+                {
+                    alert("请先登录");return false;
+                }
+                //加入noendorse=0则是没有点过赞
+                if(noendorse==1)
+                {
+                        $.get('endorse',{'t_id':t_id,'u_id':u_id},function(msg){
+                            $("#noendorse").val(t_id);
+                            //算出现在一共的点赞数量然后再返回到标签里
+                            // alert(ennum);
+                            var num = parseInt(ennum) + parseInt(1);
+                            // alert(num);
+                            $("#eny"+t_id).html('你已赞同('+num+')');
+                            // alert(msg);
+                        });
+                }
+                else
+                {
+                    var arr = noendorse.split(',');
+                     for(var i in arr){
+                      // alert(arr[i])
+                        if(parseInt(arr[i])==parseInt(t_id))
+                        {
+                            alert("您已经点过赞同了");return false;
+                        }
+                      }
 
+                    $.get('endorse',{'t_id':t_id,'u_id':u_id},function(msg){
+                        var en = noendorse + ","+t_id;
+                        $("#noendorse").val(en);
+                        //算出现在一共的点赞数量然后再返回到标签里
+                        // alert(ennum);
+                        var num = parseInt(ennum) + parseInt(1);
+                        // alert(num);
+                        $("#eny"+t_id).html('你已赞同('+num+')');
+                        // alert(msg);
+                    });
+                }
+             
+                
+        }
+</script>
 
 <?php } ?>
 <style>

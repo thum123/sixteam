@@ -16,10 +16,10 @@ session_start();
                 <i class="icon-menu"></i>
             </a>
             <ul class="nav-item l">
-                <li><a href="shiti"  target="_self">试题</a></li>
-                <li><a href="program"  target="_self">招聘</a></li>
-                <li><a href="article"  target="_self">方法</a></li>
-                <li><a href="company"  target="_self">简历</a></li>
+                <li><a href="{{URL('shiti')}}"  target="_self">试题</a></li>
+                <li><a href="{{URL('program')}}"  target="_self">招聘</a></li>
+                <li><a href="{{URL('article')}}"  target="_self">方法</a></li>
+                <li><a href="{{URL('company')}}"  target="_self">简历</a></li>
 		<li><a href="wenda" target="_self">答疑</a></li>
         <!--         <li><a href="/wiki"  target="_self">WIKI</a></li> -->
                             </ul>
@@ -63,14 +63,14 @@ session_start();
                 </li>
                 <li class="set_btn user-card-box">
                     <a target="_self" href="/u/3071208/courses" action-type="my_menu" class="user-card-item" id="header-avator">
-                        <img width="40" height="40" src="images/unknow-40.png">
+                        <img width="40" height="40" src="<?php echo isset($_SESSION['img'])?$_SESSION['img']:'images/unknow-40.png';?>">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
                     </a>
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="/u/3071208/courses"><img class="l" alt="凤颖" src="images/unknow-160.png"></a>
+                                <a href="/u/3071208/courses"><img class="l" alt="凤颖" src="<?php echo isset($_SESSION['img'])?$_SESSION['img']:'images/unknow-40.png';?>"></a>
                                 <a href="/u/3071208/courses"><span class="name text-ellipsis"><?php echo $_SESSION['username']?></span></a>
                                 <p class="meta">
 					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
@@ -170,10 +170,21 @@ session_start();
 
     <div class="modal in" id="login-modal"> <a class="close" data-dismiss="modal">×</a>
     <h1>登录</h1>
-    <ul class="login-bind-tp">
-        {{--<li class="qweibo"> <a href="http://sc.chinaz.com"><em>&nbsp;</em> QQ登录</a> </li>
-        <li class="sina"> <a href="http://sc.chinaz.com"><em>&nbsp;</em> 微博登录</a> </li>--}}
-    </ul>
+
+            <ul class="third-parties">
+            <li>
+                <p data-url="">新浪微博帐号</p>
+            </li>
+            <li>
+                <p data-url="">腾讯微博帐号</p>
+            </li>
+            <li>
+                <p data-url="">豆瓣帐号</p>
+            </li>
+            <li>
+                <p data-url=""></p>
+            </li>
+        </ul>
     <a href=""> <p>还没有账号,立即注册</p></a><br>
     <form class="login-form clearfix" method="post" action="">
 
@@ -185,6 +196,7 @@ session_start();
         <font color="red"> <span id="sp_pwd"></span></font>
 
         <input type="button" name="type" class="button-blue login" value="登录" id="sub">
+
         <input type="hidden" name="return-url" value="">
         <div class="clearfix"></div>
         <label class="remember">
@@ -206,14 +218,24 @@ session_start();
             </li>
         </ul>
     </form>
+<!--         <ul class="login-bind-tp">
+        <li class="qweibo"> <a href="http://sc.chinaz.com"><em>&nbsp;</em> QQ登录</a> </li>
+        <li class="sina"> <a href="http://sc.chinaz.com"><em>&nbsp;</em> 微博登录</a> </li>
+    </ul> -->
+    <script src="http://open.51094.com/user/myscript/157adccbd0d869.html"></script>
+            <ul>
+                <li class="login">
+                <span id="hzy_fast_login"></span>
+                </li>
+            </ul>
 </div>
 
 <div class="modal in" id="signup-modal" > <a class="close" data-dismiss="modal">×</a>
     <h1>注册</h1>
-    <ul class="login-bind-tp">
-        {{--<li class="qweibo"> <a href="#"><em>&nbsp;</em> QQ登录</a> </li>
-        <li class="sina"> <a href="#"><em>&nbsp;</em> 微博登录</a> </li>--}}
-    </ul>
+<!--     <ul class="login-bind-tp">
+        <li class="qweibo"> <a href="#"><em>&nbsp;</em> QQ登录</a> </li>
+        <li class="sina"> <a href="#"><em>&nbsp;</em> 微博登录</a> </li>
+    </ul> -->
     <p><a href="index">已有账号,直接登录</p></a><br/>
     <form class="signup-form clearfix" method="post" action="reg" onsubmit="return zhu()">
         {{--<form class="valid-form" id="js-signup-form" autocomplete="off" action='reg' method='post' onsubmit="return sub()">--}}

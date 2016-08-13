@@ -1,3 +1,8 @@
+<?php 
+if(!isset($_SESSION)){
+session_start(); 
+}
+?>
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -14,7 +19,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="<?= substr(public_path(),17);?>/js/push.js"></script><script src="<?= substr(public_path(),17);?>/js/rt.js" async="" type="text/javascript"></script><script type="text/javascript">
+<script src="js/push.js"></script><script src="js/rt.js" async="" type="text/javascript"></script><script type="text/javascript">
 
       var OP_CONFIG={"module":"wenda","page":"detail","userInfo":{"uid":"3116310","nickname":"core3116310","head":"http:\/\/img.mukewang.com\/user\/56f9d3ae0001e1c701000100-80-80.jpg","usertype":"1","roleid":0}};
   var isLogin = 1;
@@ -24,11 +29,11 @@ var is_choice = "";
   
 </script>
 
-<link rel="stylesheet" href="<?= substr(public_path(),17);?>/css/layerhxx.css" type="text/css">
+<link rel="stylesheet" href="css/layerhxx.css" type="text/css">
 
 
-<link rel="stylesheet" href="<?= substr(public_path(),17);?>/css/ahxx.css" type="text/css">
-<script src="<?= substr(public_path(),17);?>/js/jquery_002.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/seajs-text.js" async="" charset="utf-8"></script><script src="i<?= substr(public_path(),17);?>/js/common.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/string.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/suggest.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/store.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/json.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/im.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/detail.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/socket.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/ueditor_002.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/index.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/layer.js" async="" charset="utf-8"></script><link href="<?= substr(public_path(),17);?>/css/layer_002hxx.css" rel="stylesheet" charset="utf-8"><script src="<?= substr(public_path(),17);?>/js/detail-common.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/wendalist.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/wendaGuide.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/jquery.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/modal.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/verify-code.js" async="" charset="utf-8"></script><script src="<?= substr(public_path(),17);?>/js/share.js"></script><link rel="stylesheet" type="text/css" href="<?= substr(public_path(),17);?>/css/ueditorhxx.css"><link href="<?= substr(public_path(),17);?>/css/share_style0_16hxx.css" rel="stylesheet"><script defer="defer" type="text/javascript" src="<?= substr(public_path(),17);?>/js/ZeroClipboard.js"></script></head>
+<link rel="stylesheet" href="css/ahxx.css" type="text/css">
+<script src="js/jquery_002.js" async="" charset="utf-8"></script><script src="js/seajs-text.js" async="" charset="utf-8"></script><script src="ijs/common.js" async="" charset="utf-8"></script><script src="js/string.js" async="" charset="utf-8"></script><script src="js/suggest.js" async="" charset="utf-8"></script><script src="js/store.js" async="" charset="utf-8"></script><script src="js/json.js" async="" charset="utf-8"></script><script src="js/im.js" async="" charset="utf-8"></script><script src="js/detail.js" async="" charset="utf-8"></script><script src="js/socket.js" async="" charset="utf-8"></script><script src="js/ueditor_002.js" async="" charset="utf-8"></script><script src="js/index.js" async="" charset="utf-8"></script><script src="js/layer.js" async="" charset="utf-8"></script><link href="css/layer_002hxx.css" rel="stylesheet" charset="utf-8"><script src="js/detail-common.js" async="" charset="utf-8"></script><script src="js/wendalist.js" async="" charset="utf-8"></script><script src="js/wendaGuide.js" async="" charset="utf-8"></script><script src="js/jquery.js" async="" charset="utf-8"></script><script src="js/modal.js" async="" charset="utf-8"></script><script src="js/verify-code.js" async="" charset="utf-8"></script><script src="js/share.js"></script><link rel="stylesheet" type="text/css" href="css/ueditorhxx.css"><link href="css/share_style0_16hxx.css" rel="stylesheet"><script defer="defer" type="text/javascript" src="js/ZeroClipboard.js"></script></head>
 <body style="background:#fff;">
 
 
@@ -107,15 +112,15 @@ window._bd_share_config = {
 
             <div style="" id="js-qa-comment-input" class="detail-comment-input js-msg-context clearfix">
                 <div id="add-answer" class="detail-ci-avator">
-                <script src="<?= substr(public_path(),17);?>/js/jquery-1.9.1.js"></script>
-                    <script src="<?= substr(public_path(),17);?>/ckeditor/ckeditor.js"></script>
+                <script src="js/jquery-1.9.1.js"></script>
+                    <script src="ckeditor/ckeditor.js"></script>
                     <h3 class="answer-add-tip">添加回答</h3>
                     <textarea name="d_content" row="5" col="6"></textarea>
-                    <a href="#" id="ques-submit-btn" class="btn btn-red link-btn publishbtn" >发布回答</a>
+                    <a href="#" onclick="answer()" id="ques-submit-btn" class="btn btn-red link-btn publishbtn" >发布回答</a>
                 </div>
                 
                 <div id="avator-wrap" class="detail-ci-avator answer-hidden">
-                                        <img src="<?= substr(public_path(),17);?>/detail_files/56f9d3ae0001e1c701000100-80-80.jpg" alt="">
+                                        <img src="detail_files/56f9d3ae0001e1c701000100-80-80.jpg" alt="">
                     <div class="detail-r">
                         <span class="detail-name">core3116310</span>
                         <p class="detail-signal"></p>
@@ -146,7 +151,7 @@ window._bd_share_config = {
                     <div class="answer-con first" id="id_156829">
                         <div class="user-pic l">
                             <a href="http://www.imooc.com/u/1044131/bbs" target="_blank">
-                                <img src="<?= substr(public_path(),17);?>/detail_files/567b7d9a0001eadd01000100-100-100.jpg" alt="?" width="40" height="40">
+                                <img src="detail_files/567b7d9a0001eadd01000100-100-100.jpg" alt="?" width="40" height="40">
                             </a>
                         </div><!--.user end-->
                         <div class="detail-r">
@@ -197,7 +202,7 @@ window._bd_share_config = {
                         <div class="release-reply-con clearfix">
                                                                     <div class="user-pic">
                                         <a href="http://www.imooc.com/u/3116310/bbs" target="_blank">
-                                            <img src="<?= substr(public_path(),17);?>/detail_files/56f9d3ae0001e1c701000100-100-100.jpg" alt="?" width="40" height="40">
+                                            <img src="detail_files/56f9d3ae0001e1c701000100-100-100.jpg" alt="?" width="40" height="40">
                                         </a>
                                     </div>
                                                                 <!--.user-pic end-->
@@ -231,7 +236,7 @@ window._bd_share_config = {
     </div>
     <div class="qa-right r">
         <div class="wenda-slider">
-            <div class="quiz"><a class="js-quiz" href="<?= substr(public_path(),17);?>/save">我要提问</a></div>
+            <div class="quiz"><a class="js-quiz" href="save">我要提问</a></div>
             <!-- 相关问题 -->
                           <div class="panel about-ques">
                 <div class="panel-heading">
@@ -242,7 +247,7 @@ window._bd_share_config = {
                         <!-- 广告 -->
                                             <div class="advertisement">
                     <a href="http://www.imooc.com/wenda/detail/305892" data-ast="yuanwendetailright_1_192" target="_blank">
-                        <img src="<?= substr(public_path(),17);?>/detail_files/5694738900010baf02800100.jpg" title="2015年度&lt;问答牛人团&gt;榜单">
+                        <img src="detail_files/5694738900010baf02800100.jpg" title="2015年度&lt;问答牛人团&gt;榜单">
                     </a>
                 </div><!--.advertisement end-->
                                                                         <div class="recommend-class">
@@ -254,7 +259,7 @@ window._bd_share_config = {
                             <div class="class-info">
                                 <div class="class-icon">
                                     <a href="http://www.imooc.com/wenda/17" target="_blank">
-                                        <img src="<?= substr(public_path(),17);?>/detail_files/563aff440001e80700900090.jpg" alt="JavaScript">
+                                        <img src="detail_files/563aff440001e80700900090.jpg" alt="JavaScript">
                                     </a>
                                 </div><!--.class-icon end-->
                                 <h4>
@@ -284,7 +289,7 @@ window._bd_share_config = {
     <div class="js-qa-reply-ibox qa-reply-ibox clearfix">
         <div class="qa-reply-iavator l">
                         <a href="http://www.imooc.com/myclub/otherquestion?uid=3116310" title="core3116310">
-                <img src="<?= substr(public_path(),17);?>/detail_files/56f9d3ae0001e1c701000100-40-40.jpg" width="40" height="40">
+                <img src="detail_files/56f9d3ae0001e1c701000100-40-40.jpg" width="40" height="40">
             </a>
                     </div>
         <div class="qa-reply-iwrap">
@@ -327,12 +332,12 @@ window._bd_share_config = {
 
 
 
-<script type="text/javascript" charset="utf-8" src="<?= substr(public_path(),17);?>/js/ueditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/ueditor.js"></script>
 
 <!--script-->
-<script src="<?= substr(public_path(),17);?>/js/ssologin.js"></script>
-<script type="text/javascript" src="<?= substr(public_path(),17);?>/js/sea.js"></script>
-<script type="text/javascript" src="<?= substr(public_path(),17);?>/js/sea_config.js"></script>
+<script src="js/ssologin.js"></script>
+<script type="text/javascript" src="js/sea.js"></script>
+<script type="text/javascript" src="js/sea_config.js"></script>
 <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
 
@@ -348,7 +353,7 @@ window.bd_cpro_rtid="rHT4P1c";
 var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
 var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
 })(document);
-</script><script src="<?= substr(public_path(),17);?>/js/h.js" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=f0cfcccd7b1393990c78efdeebff3968" target="_blank"><img src="<?= substr(public_path(),17);?>/detail_files/21.gif" border="0" width="20" height="20"></a>
+</script><script src="js/h.js" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=f0cfcccd7b1393990c78efdeebff3968" target="_blank"><img src="detail_files/21.gif" border="0" width="20" height="20"></a>
 <script>
 (function(){
     var bp = document.createElement('script');
@@ -357,20 +362,25 @@ var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
-</div><script src="<?= substr(public_path(),17);?>/detail_files/user.htm" type="text/javascript"></script><script src="<?= substr(public_path(),17);?>/detail_files/iplookup.php" type="text/javascript"></script>
+</div><script src="detail_files/user.htm" type="text/javascript"></script><script src="detail_files/iplookup.php" type="text/javascript"></script>
 
 
-<div class="edui-imooc" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;" id="edui_fixedlayer"><div style="display: none;" id="edui41" class="edui-popup  edui-bubble edui-imooc" onmousedown="return false;"> <div id="edui41_body" class="edui-popup-body edui-imooc"> <iframe class="edui-imooc" style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" src="<?= substr(public_path(),17);?>/detail_files/a_002.htm" width="100%" frameborder="0" height="100%"></iframe> <div class="edui-shadow edui-imooc"></div> <div id="edui41_content" class="edui-popup-content edui-imooc">  </div> </div></div></div><div style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;" class="global-zeroclipboard-container" id="global-zeroclipboard-html-bridge"><object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" type="application/x-shockwave-flash" data="<?= substr(public_path(),17);?>/detail_files/ZeroClipboard.swf" width="100%" height="100%"><param name="allowScriptAccess" value="sameDomain"><param name="allowNetworking" value="all"><param name="menu" value="false"><param name="wmode" value="transparent"><param name="flashvars" value="trustedOrigins=www.imooc.com%2C%2F%2Fwww.imooc.com%2Chttp%3A%2F%2Fwww.imooc.com"></object></div></body></html>
+<div class="edui-imooc" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;" id="edui_fixedlayer"><div style="display: none;" id="edui41" class="edui-popup  edui-bubble edui-imooc" onmousedown="return false;"> <div id="edui41_body" class="edui-popup-body edui-imooc"> <iframe class="edui-imooc" style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" src="detail_files/a_002.htm" width="100%" frameborder="0" height="100%"></iframe> <div class="edui-shadow edui-imooc"></div> <div id="edui41_content" class="edui-popup-content edui-imooc">  </div> </div></div></div><div style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;" class="global-zeroclipboard-container" id="global-zeroclipboard-html-bridge"><object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" type="application/x-shockwave-flash" data="detail_files/ZeroClipboard.swf" width="100%" height="100%"><param name="allowScriptAccess" value="sameDomain"><param name="allowNetworking" value="all"><param name="menu" value="false"><param name="wmode" value="transparent"><param name="flashvars" value="trustedOrigins=www.imooc.com%2C%2F%2Fwww.imooc.com%2Chttp%3A%2F%2Fwww.imooc.com"></object></div></body></html>
 
-
+<input type="hidden" id="sess" value"<?php echo empty($_SESSION['u_id'])?'0':$_SESSION['u_id'];?>">
 <script>
     var d_content=CKEDITOR.replace("d_content");
     var tid=$("#tid").val();
     //alert(tid)
     $("#ques-submit-btn").click(function(){
      aa = d_content.getData();
-     //alert(aa)
-        $.post('<?= substr(public_path(),17);?>/hui',{
+     // alert(aa)
+     var sess = $("#sess").val();
+     if(sess == '0')
+     {
+        alert("请先登录!");return false;
+     }
+        $.post('hui',{
             aa:aa,tid:tid},
             function(data){
               // alert(data)

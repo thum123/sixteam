@@ -61,7 +61,8 @@ class LoginController extends Controller
         $arr=DB::table('users')->where('user_phone',"$u_name")->where('user_pwd',"$u_pwd")->get();
         //print_r($arr);die;
         if($arr){
-	$_SESSION['u_id']=$arr[0]['user_id'];
+	           $_SESSION['u_id']=$arr[0]['user_id'];
+               $_SESSION['img'] = isset($arr[0]['user_img'])?$arr[0]['user_img']:'0';
             echo 5;
         }else{
             echo 6;
@@ -75,6 +76,7 @@ class LoginController extends Controller
         //print_r($arr);die;
         if($arr){
 	 $_SESSION['u_id']=$arr[0]['user_id'];
+     $_SESSION['img'] = isset($arr[0]['user_img'])?$arr[0]['user_img']:'0';
             echo 5;
         }else{
             echo 6;
@@ -122,6 +124,7 @@ class LoginController extends Controller
 
     public function out(){
         unset($_SESSION['username']);
+        unset($_SESSION['u_id']);
         echo "<script>alert('退出成功');location.href='index'</script>";
     }
 
