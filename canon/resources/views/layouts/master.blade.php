@@ -70,11 +70,12 @@ session_start();
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="/u/3071208/courses"><img class="l" alt="凤颖" src="<?php echo isset($_SESSION['img'])?$_SESSION['img']:'images/unknow-40.png';?>"></a>
+                                <a href="/u/3071208/courses"><img class="l" alt="" src="<?php echo isset($_SESSION['img'])?$_SESSION['img']:'images/unknow-40.png';?>"></a>
                                 <a href="/u/3071208/courses"><span class="name text-ellipsis"><?php echo $_SESSION['username']?></span></a>
                                 <p class="meta">
-					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
-					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a>            </p>
+                                <input type="hidden" id="uid"  value="{{$_SESSION['u_id']}}">
+					<a href="/u/3071208/experience">经验<b id="js-user-mp"><span id="ex"></span></b></a>
+					<a href="/u/3071208/credit">积分<b id="js-user-credit"><span id="ins"></span></b></a>            </p>
                     
                                 <!-- <a class="icon-set setup" href="/user/setprofile"></a> -->
                                 <a class="icon-set setup" href="{{URL('user/setprofile')}}"></a>
@@ -276,10 +277,24 @@ session_start();
         </ul>
     </form>
 </div>
-
+<script type="text/javascript" src="js/jQuery.js"></script>
 <SCRIPT src="js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
 <script>
 
+      $(document).ready(function(){
+            // var a = $('#ins').html();
+        // $('#ex').html(msg.experience);
+        // alert(a);return false;
+        // alert('123');
+    var uid=document.getElementById('uid').value;
+    var url = "{{URL('inex')}}";
+    var data= {'uid':uid};
+    $.get(url,data,function(msg){
+        // alert(msg[1]);
+        $('#ins').html(msg[0]);
+        $('#ex').html(msg[1]);
+    },'json')
+});
     var flag=false;
     $('#username').blur(function(){
        // alert(123);

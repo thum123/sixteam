@@ -68,6 +68,7 @@ class SanlogController extends Controller
 
 	public function back()
 	{
+		// echo 123;die;
 		$code = $_GET['code'];
 		$data = $this -> me($code);
 		$res=DB::table('users')->where('user_nickname',"$data[name]")->first();

@@ -117,6 +117,9 @@ Route::get('college_exam','CompanyController@college_exam');
 // Route::any('http','SanlogController@http');
 Route::any('back','SanlogController@back');
 
+//积分经验
+Route::get('inex', 'LoginController@inex');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

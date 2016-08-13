@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
-
+use Request;
 session_start();
 
 class LoginController extends Controller
@@ -120,6 +120,45 @@ class LoginController extends Controller
         }
 
 
+    }
+
+     public function inex(){
+        $id=Request::input('uid');
+        // echo $id;die;
+        $row=DB::select("select * from in_ex where user_id='$id'");
+        $last_time=$row[0]['dtime'];
+        $integral=$row[0]['integral'];
+        $experience=$row[0]['experience'];
+        $continue=$row[0]['continue'];
+
+        // 当前时间
+        $time=time();
+        //今天开始
+        $begin=strtotime(date('Y-m-d')." 00:00:00"); 
+        //今天结束
+        $end=strtotime(date('Y-m-d')." 23:59:59");
+        if($last_time < $end && $last_time > $begin){
+            $arr=array("$integral","$experience");
+            return json_encode($arr);
+        }else{
+            $x=$time-$last_time;
+            // echo $x;die;
+            if($x>24*60*60){
+                $experience1=$experience+10;
+                $integral1=$integral+1;
+                DB::table('in_ex')->where('user_id',$id)->update(array('integral'=>$integral1,'experience'=>$experience1,'continue'=>0,'dtime'=>$time));
+                $brr=array("$integral1","$experience1");
+                return json_encode($brr);
+            }else{ 
+            
+                $continue2=$continue+1;
+                $experience2=$experience+10;
+                $integral2=$integral+$continue2;
+                DB::table('in_ex')->where('user_id',$id)->update(array('integral'=>$integral2,'experience'=>$experience2,'continue'=>$continue2,'dtime'=>$time));
+                $crr=array("$integral2","$experience2");
+                return json_encode($crr);
+            }
+        }
     }
 
     public function out(){
