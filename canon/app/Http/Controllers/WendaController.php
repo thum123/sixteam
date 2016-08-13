@@ -16,7 +16,7 @@ class WendaController extends Controller
             $join->on('users.user_id', '=', 't_tw.user_id');
         })
         ->simplePaginate(5);
-        //print_r($pro);die;
+        // print_r($pro);die;
         return view('wenda/wenda',['pro'=>$pro]);
     }
 
