@@ -119,6 +119,8 @@ Route::any('back','SanlogController@back');
 
 //积分经验
 Route::get('inex', 'LoginController@inex');
+//历史试题
+Route::get('history', 'LoginController@history');
 
 /*
 |--------------------------------------------------------------------------

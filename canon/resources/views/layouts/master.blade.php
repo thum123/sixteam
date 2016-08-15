@@ -87,12 +87,16 @@ session_start();
                                 <a href="/myclub/myquestion/t/ques" class="my-sns l">我的社区</a>
                             </div>
                             -->
-                            <div class="card-history">
+                           <div class="card-history">
                                 <span class="history-item">
-                                    <span class="tit text-ellipsis">python进阶</span>
-                                    <span class="media-name text-ellipsis">2-9 闭包</span>
+                                    <span class="tit text-ellipsis" id="head1"></span>
+                                    <span class="media-name text-ellipsis" id="lasttime"></span>
                                     <i class="icon-clock"></i>
-                                     <a class="continue" href="/video/6059">继续</a>
+                                    @if (empty($_SESSION['st_id'])) 
+                                        <a class="continue" href="">继续</a>
+                                     @else 
+                                     <a class="continue" href="xiang?id={{$_SESSION['st_id']}}&head={{$_SESSION['head']}}">继续</a>
+                                    @endif
                                 </span>
                             </div>
                             <div class="card-sets clearfix">
@@ -282,10 +286,6 @@ session_start();
 <script>
 
       $(document).ready(function(){
-            // var a = $('#ins').html();
-        // $('#ex').html(msg.experience);
-        // alert(a);return false;
-        // alert('123');
     var uid=document.getElementById('uid').value;
     var url = "{{URL('inex')}}";
     var data= {'uid':uid};
@@ -295,6 +295,18 @@ session_start();
         $('#ex').html(msg[1]);
     },'json')
 });
+
+         $(document).ready(function(){
+    var uid=document.getElementById('uid').value;
+    var url = "{{URL('history')}}";
+    var data= {'uid':uid};
+    $.get(url,data,function(msg){
+        // alert(msg[0]);
+        $('#head1').html(msg[0]);
+        $('#lasttime').html(msg[1]);
+    },'json')
+});
+
     var flag=false;
     $('#username').blur(function(){
        // alert(123);

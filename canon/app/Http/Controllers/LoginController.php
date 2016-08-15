@@ -160,6 +160,17 @@ class LoginController extends Controller
             }
         }
     }
+        //历史试题
+    public function history() {
+         $id=Request::input('uid');
+         $row=DB::select("select * from record where user_id='$id'");
+         $head=$row[0]['head'];
+         $last=$row[0]['lasttime'];
+         $lasttime=date('Y-m-d H:i:s',$last);
+         $hrr=array("$head","$lasttime");
+         return json_encode($hrr);
+    }
+
 
     public function out(){
         unset($_SESSION['username']);

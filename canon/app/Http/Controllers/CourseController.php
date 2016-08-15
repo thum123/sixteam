@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Session;
+session_start();
+
 class CourseController extends Controller
 {
     public function course(){
@@ -373,29 +376,39 @@ class CourseController extends Controller
        $arr=DB::table('college_questions')->where('c_college',"$c_name")->where('c_direction',"$d_name")->where('c_type',"$lei")->simplePaginate(12);
        return view('course/shi5',['shi'=>$arr,'c_name'=>$c_name,'c_direction'=>$zhuan,'c_type'=>$lei]);
     }
-    public function xiang(){
+        public function xiang(){
+        if(!empty($_SESSION['u_id'])) {
         $id=$_GET['id'];
-	//echo $id;die;
-	$num=DB::table('college_questions')->where("c_id",$id)->first();
+        $_SESSION['st_id']=$id;
+        $user_id= $_SESSION['u_id'];
+        $head=$_GET['head'];
+        // var_dump($head);die;
+        $_SESSION['head']=$head;
+        //历史记录(待修改,注册后直接插入user_id)
+        // date_default_timezone_set('Asia/Shanghai');
+        $nowtime=time()+8*60*60;
+        DB::table('record')->where("user_id",$user_id)->update(["co_id"=>$id,"head"=>$head,"lasttime"=>$nowtime]);
+        // echo $head;die;
+        $num=DB::table('college_questions')->where("c_id",$id)->first();
         $num=$num['c_num']+=1;
         $sq=DB::update("update college_questions set c_num='$num' where c_id=".$id);
         $arr=DB::table('college_questions')->where('c_id',$id)->first();
 //print_r($arr);die;
-	if(!isset($_SESSION)){
-		session_start();
-	}
-	if(!empty($_SESSION['username'])){
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    if(!empty($_SESSION['username'])){
 
-		$username=$_SESSION['username'];
+        $username=$_SESSION['username'];
 
-	//$username=$_SESSION['username'];
-	$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-	$u_id=$u_id['user_id'];
-        $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
-	//print_r($ping);die;
-	}else{
-		$ping=array();
-	}
+    //$username=$_SESSION['username'];
+    $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+    $u_id=$u_id['user_id'];
+               $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
+    //print_r($ping);die;
+    }else{
+        $ping=array();
+    }
         if($arr['c_college']=='软工学院'){
             $arr['img']='http://123.56.249.121/api/logo/软工.jpg';
         }elseif($arr['c_college']=='移动通信学院'){
@@ -417,6 +430,52 @@ class CourseController extends Controller
         }
       //  echo $arr['img'];die;
         return view('course/xiang',['arr'=>$arr,'ping'=>$ping]);
+        } else {
+        $id=$_GET['id'];
+        $head=$_GET['head'];
+        // var_dump($head);die;
+        $num=DB::table('college_questions')->where("c_id",$id)->first();
+        $num=$num['c_num']+=1;
+        $sq=DB::update("update college_questions set c_num='$num' where c_id=".$id);
+        $arr=DB::table('college_questions')->where('c_id',$id)->first();
+        //print_r($arr);die;
+  if(!isset($_SESSION)){
+    session_start();
+  }
+  if(!empty($_SESSION['username'])){
+
+    $username=$_SESSION['username'];
+
+  //$username=$_SESSION['username'];
+  $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+  $u_id=$u_id['user_id'];
+               $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
+  //print_r($ping);die;
+  }else{
+    $ping=array();
+  }
+        if($arr['c_college']=='软工学院'){
+            $arr['img']='http://123.56.249.121/api/logo/软工.jpg';
+        }elseif($arr['c_college']=='移动通信学院'){
+            $arr['img']='http://123.56.249.121/api/logo/移动.jpg';
+        }elseif($arr['c_college']=='云计算学院'){
+            $arr['img']='http://123.56.249.121/api/logo/云计算.jpg';
+        }elseif($arr['c_college']=='高翻学院'){
+            $arr['img']='http://123.56.249.121/api/logo/高翻.jpg';
+        }elseif($arr['c_college']=='国际经贸学院'){
+            $arr['img']='http://123.56.249.121/api/logo/经贸.jpg';
+        }elseif($arr['c_college']=='建筑学院'){
+            $arr['img']='http://123.56.249.121/api/logo/建筑.jpg';
+        }elseif($arr['c_college']=='游戏学院'){
+            $arr['img']='http://123.56.249.121/api/logo/游戏.jpg';
+        }elseif($arr['c_college']=='网工学院'){
+            $arr['img']='http://123.56.249.121/api/logo/网工.jpg';
+        }elseif($arr['c_college']=='传媒学院'){
+            $arr['img']='http://123.56.249.121/api/logo/传媒.jpg';
+        }
+      //  echo $arr['img'];die;
+        return view('course/xiang',['arr'=>$arr,'ping'=>$ping]);
+        }
     }
 	 public function con()
     {

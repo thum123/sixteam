@@ -125,7 +125,7 @@
 
                     <?php foreach($shi as $k=>$v){?>
                         <li class="course-one">
-                            <a href="xiang?id=<?php echo $v['c_id']?>" target="_self">
+                            <a href="xiang?id=<?php echo $v['c_id']?>&head=<?php echo $v['c_name']?>">
 
 
 				<div class="course-list-img">
@@ -151,7 +151,7 @@
                                 </div>
 
                                 <h5>
-                                    <span><a href="xiang?id=<?php echo $v['c_id']?>" target="_self"><?php echo $v['c_name']?></a></span>
+                                    <span><a href="xiang?id=<?php echo $v['c_id']?>&head=<?php echo $v['c_name']?>"><?php echo $v['c_name']?></a></span>
                                 </h5>
                                 <div class="tips">
                                     <p class="text-ellipsis">类型:<?php echo $v['c_type']?></p>
